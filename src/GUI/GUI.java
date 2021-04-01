@@ -16,7 +16,7 @@ public class GUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         try{
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("Resources/CryptMain.fxml"));
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("Resources/LoginPage.fxml"));
             primaryStage.setTitle("CryptBox");
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setScene(new Scene(root));
@@ -25,4 +25,6 @@ public class GUI extends Application {
             e.printStackTrace();
         }
     }
+
+
 }
