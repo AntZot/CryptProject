@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    private boolean isLogin;
     final private ArrayList<XYChart.Series> list = new ArrayList<>();
     private int count=0;
     @FXML
