@@ -2,9 +2,10 @@ package Stock;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.text.ParseException;
 
 public class StockTest {
-    public static void main(String[] args) throws IOException, URISyntaxException {
+    public static void main(String[] args) throws IOException, URISyntaxException, ParseException {
 
         String key = "c1jlrmf48v6pv69goegg";
         String code = "AAPL";
