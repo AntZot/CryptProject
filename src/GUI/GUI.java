@@ -19,6 +19,10 @@ public class GUI extends Application {
         launch(args);
     }
 
+    /**
+     * GUI Start point
+     * @param primaryStage get stage params
+     */
     @Override
     public void start(Stage primaryStage) {
         try{

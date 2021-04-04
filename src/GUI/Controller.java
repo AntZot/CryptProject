@@ -37,6 +37,10 @@ public class Controller implements Initializable {
     @FXML
     private Button addBtm;
 
+    /**
+     * Handle all clicks and events
+     * @param event
+     */
     @FXML
     public void ClickHandler(ActionEvent event){
 

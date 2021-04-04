@@ -24,20 +24,33 @@ public class LoginController {
     @FXML
     private TextField LoginTextField;
     /**
-     * Password text field
+     * Hide password text field
      */
     @FXML
     private PasswordField HidePasswordTextField;
 
+    /**
+     * Show password text fiela
+     */
     @FXML
     private TextField ShowPasswordTextField;
 
+    /**
+     *  Login buttom
+     */
     @FXML
     public Button LoginButtom;
 
+    /**
+     * Buttom change show/hide password
+     */
     @FXML
     private CheckBox ToggleButtom;
 
+    /**
+     * Check click events on toggleButtom
+     * @param event checking click events
+     */
     @FXML
     void TogglePasAnAction(ActionEvent event){
         if(ToggleButtom.isSelected()){
