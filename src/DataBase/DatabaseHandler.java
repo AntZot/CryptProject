@@ -65,6 +65,7 @@ public class DatabaseHandler extends Configs{
             content.put("log", res.getString("login"));
             content.put("password", res.getNString("password"));
             content.put("mail", res.getNString("mail"));
+            content.put("id", res.getString("idusers"));
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
@@ -81,6 +82,25 @@ public class DatabaseHandler extends Configs{
 
         } catch (SQLException | ClassNotFoundException | IOException throwables) {
             throwables.printStackTrace();
+        }
+    }
+
+    public void addBags(String login , String bagName)
+    {
+        HashMap user;
+        user = this.selectUserLogin(login);
+        String insert = "INSERT INTO " + Const.BAGS_TABLE + "(" +
+                Const.BAG_NAME + "," + Const.BAG_USERS_ID + "," +
+                Const.BAG_PROFIT + ")" + "VALUES(?,?,?)";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(insert);
+            prSt.setString(1, bagName);
+            prSt.setString(2, (String) user.get("id"));
+            prSt.setString(3,  "0");
+            prSt.execute();
+        } catch (SQLException | ClassNotFoundException e)
+        {
+            e.printStackTrace();
         }
     }
 }
