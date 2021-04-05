@@ -1,7 +1,11 @@
 package DataBase;
 
+import java.io.*;
 import java.sql.*;
 import java.util.HashMap;
+import org.apache.ibatis.jdbc.ScriptRunner;
+import org.apache.commons.io.IOUtils;
+
 
 public class DatabaseHandler extends Configs{
     Connection dbConnection;
@@ -65,5 +69,18 @@ public class DatabaseHandler extends Configs{
             throwables.printStackTrace();
         }
         return content;
+    }
+
+    public void createDataBase()
+    {
+        try {
+            Connection con = getDbConnection();
+            Reader reader = new BufferedReader(new FileReader("src/DataBase/my_first_db.sql"));
+            ScriptRunner sr = new ScriptRunner(con);
+            sr.runScript(reader);
+
+        } catch (SQLException | ClassNotFoundException | IOException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
