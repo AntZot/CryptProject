@@ -30,7 +30,7 @@ ENGINE = InnoDB;
 -- Table `project`.`bags`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `project`.`bags` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `profit` VARCHAR(45) NOT NULL,
   `users_mail` VARCHAR(45) NOT NULL,
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS `project`.`bags` (
   CONSTRAINT `fk_bags_users1`
     FOREIGN KEY (`users_mail`)
     REFERENCES `project`.`users` (`mail`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -61,8 +61,8 @@ CREATE TABLE IF NOT EXISTS `project`.`bags_content` (
   CONSTRAINT `fk_bags_content_bags1`
     FOREIGN KEY (`bags_id`)
     REFERENCES `project`.`bags` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -80,8 +80,8 @@ CREATE TABLE IF NOT EXISTS `project`.`candles` (
   CONSTRAINT `fk_candles_bags_content1`
     FOREIGN KEY (`ticket`)
     REFERENCES `project`.`bags_content` (`ticket`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
