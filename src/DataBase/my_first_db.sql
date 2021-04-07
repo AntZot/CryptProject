@@ -1,76 +1,90 @@
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8;
-USE `mydb`;
+-- MySQL Workbench Forward Engineering
 
-CREATE TABLE IF NOT EXISTS `mydb`.`users` (
-  `idusers` INT NOT NULL AUTO_INCREMENT,
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema project
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `project` ;
+
+-- -----------------------------------------------------
+-- Schema project
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `project` DEFAULT CHARACTER SET utf8 ;
+USE `project` ;
+
+-- -----------------------------------------------------
+-- Table `project`.`users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `project`.`users` (
   `login` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   `mail` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idusers`))
+  PRIMARY KEY (`mail`))
 ENGINE = InnoDB;
 
 
-CREATE TABLE IF NOT EXISTS `mydb`.`bags` (
-  `idbags` INT NOT NULL AUTO_INCREMENT,
-  `users_idusers` INT NOT NULL,
+-- -----------------------------------------------------
+-- Table `project`.`bags`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `project`.`bags` (
+  `id` INT NOT NULL,
   `name` VARCHAR(45) NOT NULL,
-  `profit` INT NOT NULL,
-  PRIMARY KEY (`idbags`),
-  INDEX `fk_bags_users_idx` (`users_idusers` ASC),
-  CONSTRAINT `fk_bags_users`
-    FOREIGN KEY (`users_idusers`)
-    REFERENCES `mydb`.`users` (`idusers`)
+  `profit` VARCHAR(45) NOT NULL,
+  `users_mail` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_bags_users1_idx` (`users_mail` ASC) VISIBLE,
+  CONSTRAINT `fk_bags_users1`
+    FOREIGN KEY (`users_mail`)
+    REFERENCES `project`.`users` (`mail`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
-CREATE TABLE IF NOT EXISTS `mydb`.`assets` (
-  `idassets` INT NOT NULL,
-  `ticket` VARCHAR(45) NULL,
-  PRIMARY KEY (`idassets`))
-ENGINE = InnoDB;
-
-
-
-CREATE TABLE IF NOT EXISTS `mydb`.`bagcontent` (
-  `idbagcontent` INT NOT NULL,
-  `bags_idbags` INT NOT NULL,
-  `ticket` VARCHAR(45) NULL,
-  `firstData` DATE NULL,
-  `lastData` DATE NULL,
-  `assets_idassets` INT NOT NULL,
-  PRIMARY KEY (`idbagcontent`),
-  INDEX `fk_bagcontent_bags1_idx` (`bags_idbags` ASC) ,
-  INDEX `fk_bagcontent_assets1_idx` (`assets_idassets` ASC) ,
-  CONSTRAINT `fk_bagcontent_bags1`
-    FOREIGN KEY (`bags_idbags`)
-    REFERENCES `mydb`.`bags` (`idbags`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_bagcontent_assets1`
-    FOREIGN KEY (`assets_idassets`)
-    REFERENCES `mydb`.`assets` (`idassets`)
+-- -----------------------------------------------------
+-- Table `project`.`bags_content`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `project`.`bags_content` (
+  `ticket` VARCHAR(10) NOT NULL,
+  `date_start` DATETIME NOT NULL,
+  `date_finish` DATETIME NOT NULL,
+  `count` INT NOT NULL,
+  `bags_id` INT NOT NULL,
+  `price_start` FLOAT NOT NULL,
+  `price_finish` FLOAT NOT NULL,
+  `ticket_name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`ticket`, `ticket_name`),
+  INDEX `fk_bags_content_bags1_idx` (`bags_id` ASC) VISIBLE,
+  CONSTRAINT `fk_bags_content_bags1`
+    FOREIGN KEY (`bags_id`)
+    REFERENCES `project`.`bags` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
-
-CREATE TABLE IF NOT EXISTS `mydb`.`candles` (
-  `idcandles` INT NOT NULL AUTO_INCREMENT,
-  `assets_idassets` INT NOT NULL,
-  `firstTime` DATETIME NOT NULL,
-  `lastTime` DATETIME NOT NULL,
-  `max` VARCHAR(45) NULL,
-  `min` VARCHAR(45) NULL,
-  `start` VARCHAR(45) NULL,
-  `finish` VARCHAR(45) NULL,
-  PRIMARY KEY (`idcandles`),
-  INDEX `fk_candles_assets1_idx` (`assets_idassets` ASC) ,
-  CONSTRAINT `fk_candles_assets1`
-    FOREIGN KEY (`assets_idassets`)
-    REFERENCES `mydb`.`assets` (`idassets`)
+-- -----------------------------------------------------
+-- Table `project`.`candles`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `project`.`candles` (
+  `ticket` VARCHAR(10) NOT NULL,
+  `price_start` FLOAT NOT NULL,
+  `price_finish` FLOAT NOT NULL,
+  `price_max` FLOAT NOT NULL,
+  `price_min` FLOAT NOT NULL,
+  `gap` VARCHAR(2) NOT NULL,
+  PRIMARY KEY (`ticket`),
+  CONSTRAINT `fk_candles_bags_content1`
+    FOREIGN KEY (`ticket`)
+    REFERENCES `project`.`bags_content` (`ticket`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

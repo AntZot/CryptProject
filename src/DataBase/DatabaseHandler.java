@@ -41,12 +41,12 @@ public class DatabaseHandler extends Configs{
 
 
     }
-    public void deleteUser(String login)
+    public void deleteUser(String mail)
     {
         try {
-            String del = "DELETE FROM " + Const.USER_TABLE + " WHERE " + Const.USER_LOGIN + " = ?";
+            String del = "DELETE FROM " + Const.USER_TABLE + " WHERE " + Const.USER_MAIL + " = ?";
             PreparedStatement prSt = getDbConnection().prepareStatement(del);
-            prSt.setString(1, login);
+            prSt.setString(1, mail);
             prSt.execute();
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
@@ -54,19 +54,18 @@ public class DatabaseHandler extends Configs{
 
     }
 
-    public HashMap selectUserLogin(String login)
+    public HashMap selectUserMail(String mail)
     {
-        String sel = "SELECT * FROM " + Const.USER_TABLE + " WHERE " + Const.USER_LOGIN + " = ?";
+        String sel = "SELECT * FROM " + Const.USER_TABLE + " WHERE " + Const.USER_MAIL + " = ?";
         HashMap<String, String> content = new HashMap<>();
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(sel);
-            prSt.setString(1, login);
+            prSt.setString(1, mail);
             ResultSet res = prSt.executeQuery();
             res.next();
             content.put(Const.USER_LOGIN, res.getString(Const.USER_LOGIN));
             content.put(Const.USER_PASSWORD, res.getNString(Const.USER_PASSWORD));
             content.put(Const.USER_MAIL, res.getNString(Const.USER_MAIL));
-            content.put(Const.USER_ID, res.getString(Const.USER_ID));
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
@@ -86,17 +85,17 @@ public class DatabaseHandler extends Configs{
         }
     }
 
-    public void addBags(String login , String bagName)
+    public void addBags(String mail , String bagName)
     {
         HashMap user;
-        user = this.selectUserLogin(login);
+        user = this.selectUserMail(mail);
         String insert = "INSERT INTO " + Const.BAGS_TABLE + "(" +
-                Const.BAG_NAME + "," + Const.BAG_USERS_ID + "," +
+                Const.BAG_NAME + "," + Const.BAG_USERS_MAIL + "," +
                 Const.BAG_PROFIT + ")" + "VALUES(?,?,?)";
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(insert);
             prSt.setString(1, bagName);
-            prSt.setString(2, (String) user.get(Const.USER_ID));
+            prSt.setString(2, (String) user.get(Const.USER_MAIL));
             prSt.setInt(3,  0);
             prSt.execute();
         } catch (SQLException | ClassNotFoundException e)
@@ -105,14 +104,14 @@ public class DatabaseHandler extends Configs{
         }
     }
 
-    public void deleteBags(String login, String bagName){
+    public void deleteBags(String mail, String bagName){
         HashMap user;
-        user = this.selectUserLogin(login);
+        user = this.selectUserMail(mail);
         try {
-            String del = "DELETE FROM " + Const.BAGS_TABLE + " WHERE " + Const.BAG_USERS_ID +  " = ?"
+            String del = "DELETE FROM " + Const.BAGS_TABLE + " WHERE " + Const.BAG_USERS_MAIL +  " = ?"
                     + " AND " + Const.BAG_NAME + " = ?";
             PreparedStatement prSt = getDbConnection().prepareStatement(del);
-            prSt.setInt(1, (Integer) user.get(Const.USER_ID));
+            prSt.setString(1, Const.BAG_USERS_MAIL);
             prSt.setString(2, bagName);
             prSt.execute();
         } catch (SQLException | ClassNotFoundException throwables) {
@@ -120,19 +119,19 @@ public class DatabaseHandler extends Configs{
         }
     }
 
-    public HashMap selectBags(String login, String bagName){
+    public HashMap selectBags(String mail, String bagName){
         HashMap user;
-        user = this.selectUserLogin(login);
-        String sel = "SELECT * FROM " + Const.BAGS_TABLE + " WHERE " + Const.BAG_USERS_ID + " = ?"+
+        user = this.selectUserMail(mail);
+        String sel = "SELECT * FROM " + Const.BAGS_TABLE + " WHERE " + Const.BAG_USERS_MAIL + " = ?"+
                 " AND " + Const.BAG_NAME + " = ?";
         HashMap<String, String> content = new HashMap<>();
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(sel);
-            prSt.setString(1, (String) user.get(Const.USER_ID));
+            prSt.setString(1, Const.BAG_USERS_MAIL);
             prSt.setString(2, bagName);
             ResultSet res = prSt.executeQuery();
             res.next();
-            content.put(Const.BAG_USERS_ID, res.getString(Const.BAG_USERS_ID));
+            content.put(Const.BAG_USERS_MAIL, res.getString(Const.BAG_USERS_MAIL));
             content.put(Const.BAG_NAME, res.getString(Const.BAG_NAME));
             content.put(Const.BAG_PROFIT, res.getString(Const.BAG_PROFIT));
             content.put(Const.BAG_ID, res.getString(Const.BAG_ID));
@@ -142,14 +141,14 @@ public class DatabaseHandler extends Configs{
         return content;
     }
 
-    public ArrayList selectBags(String login){
+    public ArrayList selectBags(String mail){
         HashMap user;
-        user = this.selectUserLogin(login);
-        String sel = "SELECT * FROM " + Const.BAGS_TABLE + " WHERE " + Const.BAG_USERS_ID + " = ?";
+        user = this.selectUserMail(mail);
+        String sel = "SELECT * FROM " + Const.BAGS_TABLE + " WHERE " + Const.BAG_USERS_MAIL + " = ?";
         ArrayList<HashMap<String, String>> content = new ArrayList<>();
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(sel);
-            prSt.setString(1, (String) user.get(Const.USER_ID));
+            prSt.setString(1, (String) user.get(Const.BAG_USERS_MAIL));
             ResultSet res = prSt.executeQuery();
             while (res.next())
             {
@@ -157,7 +156,7 @@ public class DatabaseHandler extends Configs{
                 bag.put(Const.BAG_ID, res.getString(Const.BAG_ID));
                 bag.put(Const.BAG_NAME, res.getString(Const.BAG_NAME));
                 bag.put(Const.BAG_PROFIT, res.getString(Const.BAG_PROFIT));
-                bag.put(Const.BAG_USERS_ID, res.getString(Const.BAG_USERS_ID));
+                bag.put(Const.BAG_USERS_MAIL, res.getString(Const.BAG_USERS_MAIL));
                 content.add(bag);
             }
         } catch (SQLException | ClassNotFoundException throwables) {
@@ -166,16 +165,16 @@ public class DatabaseHandler extends Configs{
         return content;
     }
 
-    public void updateProfitBags(String login, String bagName, int profit)
+    public void updateProfitBags(String mail, String bagName, int profit)
     {
         HashMap user;
-        user = this.selectUserLogin(login);
+        user = this.selectUserMail(mail);
         try {
             String update = "UPDATE " + Const.BAGS_TABLE + " SET " + Const.BAG_PROFIT +  " = ? "+
-                    "WHERE " + Const.BAG_USERS_ID + " = ?" + "AND " + Const.BAG_NAME + " = ?";
+                    "WHERE " + Const.BAG_USERS_MAIL + " = ?" + "AND " + Const.BAG_NAME + " = ?";
             PreparedStatement prSt = getDbConnection().prepareStatement(update);
             prSt.setInt(1, profit);
-            prSt.setString(2, (String) user.get(Const.USER_ID));
+            prSt.setString(2, Const.BAG_USERS_MAIL);
             prSt.setString(3, bagName);
             prSt.execute();
         } catch (SQLException | ClassNotFoundException throwables) {
