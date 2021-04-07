@@ -109,7 +109,7 @@ public class DatabaseHandler extends Configs{
             String del = "DELETE FROM " + Const.BAGS_TABLE + " WHERE " + Const.BAG_USERS_MAIL +  " = ?"
                     + " AND " + Const.BAG_NAME + " = ?";
             PreparedStatement prSt = getDbConnection().prepareStatement(del);
-            prSt.setString(1, Const.BAG_USERS_MAIL);
+            prSt.setString(1, (String) user.get(Const.USER_MAIL));
             prSt.setString(2, bagName);
             prSt.execute();
         } catch (SQLException | ClassNotFoundException throwables) {
@@ -175,6 +175,24 @@ public class DatabaseHandler extends Configs{
             prSt.setString(2, (String) user.get(Const.USER_MAIL));
             prSt.setString(3, bagName);
             prSt.execute();
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void addBagsContent(String mail, String name, String ticket, String ticket_name, int count){
+        HashMap bag;
+        bag = this.selectBags(mail, name);
+        String insert = "INSERT INTO " + Const.BAGS_CONTENT_TABLE + "(" + Const.BAGS_CONTENT_TICKET +
+                "," + Const.BAGS_CONTENT_TICKET_NAME + "," + Const.BAGS_CONTENT_COUNT +
+                "," + Const.BAGS_CONTENT_BAGS_ID + ")" + "VALUES(?,?,?,?)";
+        try {
+            PreparedStatement prst = getDbConnection().prepareStatement(insert);
+            prst.setString(1, ticket);
+            prst.setString(2, ticket_name);
+            prst.setInt(3, count);
+            prst.setInt(4,  Integer.parseInt((String) bag.get(Const.BAG_ID)));
+            prst.execute();
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }

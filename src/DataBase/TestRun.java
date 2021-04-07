@@ -8,5 +8,6 @@ public class TestRun {
         String mail = "glebaiva@gmail.com";
         HashMap user = new HashMap<>();
         DatabaseHandler dbHandler = new DatabaseHandler();
+        dbHandler.deleteBags(mail, "first");
     }
 }
