@@ -172,7 +172,7 @@ public class DatabaseHandler extends Configs{
                     "WHERE " + Const.BAG_USERS_MAIL + " = ?" + "AND " + Const.BAG_NAME + " = ?";
             PreparedStatement prSt = getDbConnection().prepareStatement(update);
             prSt.setInt(1, profit);
-            prSt.setString(2, Const.BAG_USERS_MAIL);
+            prSt.setString(2, (String) user.get(Const.USER_MAIL));
             prSt.setString(3, bagName);
             prSt.execute();
         } catch (SQLException | ClassNotFoundException throwables) {
