@@ -90,13 +90,11 @@ public class DatabaseHandler extends Configs{
         HashMap user;
         user = this.selectUserMail(mail);
         String insert = "INSERT INTO " + Const.BAGS_TABLE + "(" +
-                Const.BAG_NAME + "," + Const.BAG_USERS_MAIL + "," +
-                Const.BAG_PROFIT + ")" + "VALUES(?,?,?)";
+                Const.BAG_NAME + "," + Const.BAG_USERS_MAIL + ")" + "VALUES(?,?)";
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(insert);
             prSt.setString(1, bagName);
             prSt.setString(2, (String) user.get(Const.USER_MAIL));
-            prSt.setInt(3,  0);
             prSt.execute();
         } catch (SQLException | ClassNotFoundException e)
         {
@@ -127,7 +125,7 @@ public class DatabaseHandler extends Configs{
         HashMap<String, String> content = new HashMap<>();
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(sel);
-            prSt.setString(1, Const.BAG_USERS_MAIL);
+            prSt.setString(1, (String) user.get(Const.USER_MAIL));
             prSt.setString(2, bagName);
             ResultSet res = prSt.executeQuery();
             res.next();
@@ -148,7 +146,7 @@ public class DatabaseHandler extends Configs{
         ArrayList<HashMap<String, String>> content = new ArrayList<>();
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(sel);
-            prSt.setString(1, (String) user.get(Const.BAG_USERS_MAIL));
+            prSt.setString(1, (String) user.get(Const.USER_MAIL));
             ResultSet res = prSt.executeQuery();
             while (res.next())
             {
