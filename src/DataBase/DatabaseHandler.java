@@ -180,19 +180,77 @@ public class DatabaseHandler extends Configs{
         }
     }
 
+    private int _selectMaxId()
+    {
+        String sel = "SELECT * FROM " + Const.BAGS_CONTENT_TABLE + " ORDER BY " + Const.BAGS_CONTENT_ID + " DESC LIMIT 1";
+        Statement st = null;
+        try
+        {
+            st = getDbConnection().createStatement();
+            ResultSet res = st.executeQuery(sel);
+            res.next();
+            return res.getInt(Const.BAGS_CONTENT_ID);
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+        return -1;
+    }
+
     public void addBagsContent(String mail, String name, String ticket, String ticket_name, int count){
         HashMap bag;
         bag = this.selectBags(mail, name);
         String insert = "INSERT INTO " + Const.BAGS_CONTENT_TABLE + "(" + Const.BAGS_CONTENT_TICKET +
                 "," + Const.BAGS_CONTENT_TICKET_NAME + "," + Const.BAGS_CONTENT_COUNT +
-                "," + Const.BAGS_CONTENT_BAGS_ID + ")" + "VALUES(?,?,?,?)";
+                 ")" + " VALUES(?,?,?)";
         try {
-            PreparedStatement prst = getDbConnection().prepareStatement(insert);
+            Connection con = getDbConnection();
+            PreparedStatement prst = con.prepareStatement(insert);
             prst.setString(1, ticket);
             prst.setString(2, ticket_name);
             prst.setInt(3, count);
-            prst.setInt(4,  Integer.parseInt((String) bag.get(Const.BAG_ID)));
             prst.execute();
+
+            int id = this._selectMaxId();
+
+            insert = "INSERT INTO " + Const.BAGS_HAS_BAGS_CONTENT_TABLE + "(" + Const.MAP_BAGS_ID + "," +
+                    Const.MAP_BAGS_CONTENT_ID + "," + Const.BAGS_CONTENT_TICKET + ")" + " VALUES(?,?,?)";
+            prst = con.prepareStatement(insert);
+            prst.setInt(1, Integer.parseInt((String) bag.get(Const.BAG_ID)));
+            prst.setInt(2, id);
+            prst.setString(3, ticket);
+            prst.execute();
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void deleteBagsContent(String mail, String name, String ticket){
+
+        String select = "SELECT * FROM " + Const.BAGS_HAS_BAGS_CONTENT_TABLE + " WHERE " + Const.MAP_BAGS_ID +
+                " = ? AND " + Const.MAP_TICKET + " = ?";
+        HashMap bag = selectBags(mail, name);
+        try {
+            Connection con = getDbConnection();
+            PreparedStatement prst = con.prepareStatement(select);
+            int id = Integer.parseInt((String) bag.get(Const.BAG_ID));
+            prst.setInt(1, Integer.parseInt((String) bag.get(Const.BAG_ID)));
+            prst.setString(2, ticket);
+            ResultSet res = prst.executeQuery();
+            res.next();
+            id = res.getInt(Const.MAP_BAGS_CONTENT_ID);
+            String del = "DELETE FROM " + Const.BAGS_CONTENT_TABLE + " WHERE " + Const.BAGS_CONTENT_ID +
+                    " = ?";
+            prst = con.prepareStatement(del);
+            prst.setInt(1, id);
+            prst.execute();
+
+            del = "DELETE FROM " + Const.BAGS_HAS_BAGS_CONTENT_TABLE + " WHERE " + Const.MAP_BAGS_CONTENT_ID +
+                    " = ? AND " + Const.MAP_BAGS_ID + " = ?";
+            prst = con.prepareStatement(del);
+            prst.setInt(1, id);
+            prst.setInt(2, Integer.parseInt((String) bag.get(Const.BAG_ID)));
+            prst.execute();
+
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }

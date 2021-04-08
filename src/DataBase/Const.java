@@ -16,9 +16,14 @@ public class Const {
     public static final String BAGS_CONTENT_TICKET = "ticket";
     public static final String BAGS_CONTENT_COUNT = "count";
     public static final String BAGS_CONTENT_TICKET_NAME = "ticket_name";
-    public static final String BAGS_CONTENT_BAGS_ID = "bags_id";
+    public static final String BAGS_CONTENT_ID = "id";
     public static final String BAGS_CONTENT_PRICE_START = "price_start";
     public static final String BAGS_CONTENT_PRICE_FINISH = "price_finish";
     public static final String BAGS_CONTENT_DATE_START = "date_start";
     public static final String BAGS_CONTENT_DATE_FINISH = "date_finish";
+
+    public static final String BAGS_HAS_BAGS_CONTENT_TABLE = "bags_has_bags_content";
+    public  static final String MAP_BAGS_ID = "bags_id";
+    public static final String MAP_BAGS_CONTENT_ID = "bags_content_id";
+    public  static final String MAP_TICKET = "ticket";
 }
