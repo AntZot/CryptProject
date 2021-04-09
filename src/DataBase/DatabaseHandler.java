@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.apache.ibatis.transaction.Transaction;
 
 
 public class DatabaseHandler extends Configs{
@@ -24,6 +25,7 @@ public class DatabaseHandler extends Configs{
 
     public void addUser(String login, String password, String mail)
     {
+
         String insert = "INSERT INTO " + Const.USER_TABLE + "(" +
                 Const.USER_LOGIN + "," + Const.USER_PASSWORD + "," +
                 Const.USER_MAIL + ")" + "VALUES(?,?,?)";
@@ -204,6 +206,7 @@ public class DatabaseHandler extends Configs{
                  ")" + " VALUES(?,?,?)";
         try {
             Connection con = getDbConnection();
+            //con.setAutoCommit(false);
             PreparedStatement prst = con.prepareStatement(insert);
             prst.setString(1, ticket);
             prst.setString(2, ticket_name);
@@ -219,6 +222,8 @@ public class DatabaseHandler extends Configs{
             prst.setInt(2, id);
             prst.setString(3, ticket);
             prst.execute();
+            //con.commit();
+            //con.setAutoCommit(true);
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
