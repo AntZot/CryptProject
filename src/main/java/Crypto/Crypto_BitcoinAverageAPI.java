@@ -1,5 +1,6 @@
 package Crypto;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.client.utils.URIBuilder;
 
@@ -13,7 +14,7 @@ import java.util.Date;
 
 public class Crypto_BitcoinAverageAPI implements CryptoStrategy{
     @Override
-    public Double execute(String key, String code, String date_from, String date_to) throws URISyntaxException, IOException, ParseException {
+    public Double execute(String key, String code, String date_from, String date_to) throws URISyntaxException, IOException, ParseException, JsonMappingException {
         //Значение по умолчанию
         String symbol_set = "global";
         String resolution = "day";
@@ -40,7 +41,8 @@ public class Crypto_BitcoinAverageAPI implements CryptoStrategy{
         System.out.println(responseCode);
         //Парсинг JSON
         ObjectMapper mapper = new ObjectMapper();
-        BitcoinAverageJSON crypto = mapper.readValue(url, BitcoinAverageJSON.class);
+        BitcoinAverageJSON crypto = null;
+        crypto = mapper.readValue(url, BitcoinAverageJSON.class);
         Double price = crypto.average;
         return price;
     }

@@ -1,0 +1,8 @@
+Crypto/CryptoContext.java
+ Crypto.CryptoContext
+Crypto/CryptoStrategy.java
+ Crypto.CryptoStrategy
+Crypto/CryptoTest.java
+ Crypto.CryptoTest
+Crypto/BitcoinAverageJSON.java
+ Crypto.BitcoinAverageJSON
