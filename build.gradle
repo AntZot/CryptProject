@@ -17,3 +17,7 @@ dependencies {
     implementation("com.liferay:com.fasterxml.jackson.databind:2.10.3.LIFERAY-PATCHED-1")
     implementation("org.apache.httpcomponents:httpclient:4.5.13")
 }
+
+javadoc {
+    options.encoding = 'UTF-8'
+}

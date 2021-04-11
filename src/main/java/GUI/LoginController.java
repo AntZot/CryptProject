@@ -16,40 +16,27 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.util.concurrent.TimeUnit;
-
+/** Класс контроллера окна логина*/
 public class LoginController {
-    /**
-     * Login text field
-     */
+
     @FXML
     private TextField LoginTextField;
-    /**
-     * Hide password text field
-     */
+
     @FXML
     private PasswordField HidePasswordTextField;
 
-    /**
-     * Show password text fiela
-     */
     @FXML
     private TextField ShowPasswordTextField;
 
-    /**
-     *  Login buttom
-     */
     @FXML
     public Button LoginButtom;
 
-    /**
-     * Buttom change show/hide password
-     */
     @FXML
     private CheckBox ToggleButtom;
 
     /**
-     * Check click events on toggleButtom
-     * @param event checking click events
+     * Проверяет событие на toggleButtom
+     * @param event имеет значение события
      */
     @FXML
     void TogglePasAnAction(ActionEvent event){
@@ -67,7 +54,7 @@ public class LoginController {
     }
 
     /**
-     * Data entry buttom
+     * Кнопка ввода данных
      * @param event
      */
     @FXML
@@ -96,7 +83,7 @@ public class LoginController {
     }
 
     /**
-     * Close program
+     * Кнопка закрытия программы
      * @param event
      */
     @FXML

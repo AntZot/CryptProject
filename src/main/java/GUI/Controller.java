@@ -13,15 +13,18 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/** Класс контроллера главного окна приложения*/
 public class Controller implements Initializable {
     private boolean isLogin;
     final private ArrayList<XYChart.Series> list = new ArrayList<>();
     private int count=0;
+
     @FXML
     private CategoryAxis x;
 
     @FXML
     private NumberAxis y;
+
 
     @FXML
     private LineChart<?, ?> Graph;
@@ -30,7 +33,6 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-
     @FXML
     private Button exitBtm;
 
@@ -38,8 +40,8 @@ public class Controller implements Initializable {
     private Button addBtm;
 
     /**
-     * Handle all clicks and events
-     * @param event
+     * Обрабатывает все события
+     * @param event имеет значение события
      */
     @FXML
     public void ClickHandler(ActionEvent event){

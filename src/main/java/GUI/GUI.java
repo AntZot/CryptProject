@@ -12,16 +12,18 @@ import javafx.stage.StageStyle;
 
 import java.awt.*;
 
+/** Класс запуска графического интерфейса*/
 public class GUI extends Application {
     Parent root;
     private double xOffset,yOffset;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     /**
-     * GUI Start point
-     * @param primaryStage get stage params
+     * Стартовая точка запуска GUI
+     * @param primaryStage параметры окна
      */
     @Override
     public void start(Stage primaryStage) {
