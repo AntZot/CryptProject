@@ -13,6 +13,11 @@ Installation
 ------------
 Coming soon...
 
+Вependencies
+------------
+-[JavaFx documentation](https://docs.oracle.com/javafx/2/)
+-[Apache HttpClient documentation](https://javadoc.io/doc/org.apache.httpcomponents/httpclient/latest/overview-summary.html)
+
 
 
 
