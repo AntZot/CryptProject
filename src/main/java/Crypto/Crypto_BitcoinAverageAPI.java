@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class Crypto_BitcoinAverageAPI implements CryptoStrategy{
     @Override
-    public Double execute(String key, String code, String date_from, String date_to) throws URISyntaxException, IOException, ParseException, JsonMappingException {
+    public Double execute(String key, String code, String date_from, String date_to) throws URISyntaxException, IOException, ParseException {
         //Значение по умолчанию
         String symbol_set = "global";
         String resolution = "day";
@@ -42,7 +42,7 @@ public class Crypto_BitcoinAverageAPI implements CryptoStrategy{
         //Парсинг JSON
         ObjectMapper mapper = new ObjectMapper();
         BitcoinAverageJSON crypto = null;
-        crypto = mapper.readValue(url, BitcoinAverageJSON.class);
+        //crypto = mapper.readValue(url, BitcoinAverageJSON.class);
         Double price = crypto.average;
         return price;
     }

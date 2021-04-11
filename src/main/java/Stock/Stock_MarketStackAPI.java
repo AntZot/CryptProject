@@ -33,9 +33,9 @@ public class Stock_MarketStackAPI implements StockStrategy{
         //Парсинг JSON
         ObjectMapper mapper = new ObjectMapper();
         Double price =0.0d;
-        MarketStackJSON stock = mapper.readValue(url, MarketStackJSON.class);
-        Date date = stock.getData().get(stock.getData().size() - 1).date;
-        price = stock.getData().get(stock.getData().size() - 1).close;
+        //MarketStackJSON stock = mapper.readValue(url, MarketStackJSON.class);
+        //Date date = stock.getData().get(stock.getData().size() - 1).date;
+        price =0d;//= stock.getData().get(stock.getData().size() - 1).close;
         return price;
     }
 }
