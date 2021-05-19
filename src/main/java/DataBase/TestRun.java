@@ -8,7 +8,7 @@ public class TestRun {
         String mail = "glebaiva@gmail.com";
         HashMap user = new HashMap<>();
         DatabaseHandler dbHandler = new DatabaseHandler();
-        dbHandler.addBagsContent(mail, "first", "fgj", "ABfgjSDF", 5);
+        dbHandler.addBagsContent(mail, "SBER", "SBERBANK", 5, "FirstBag");
 //        dbHandler.deleteBagsContent(mail, "first", "tink");
 //        dbHandler.addUser(log,pass, mail);
 //        dbHandler.addUser("anton", pass, "anton");

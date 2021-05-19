@@ -1,26 +1,39 @@
 package DataBase;
 
-import java.io.*;
+import org.apache.ibatis.jdbc.ScriptRunner;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.ibatis.jdbc.ScriptRunner;
-import org.apache.ibatis.transaction.Transaction;
-
 
 public class DatabaseHandler extends Configs{
-    Connection dbConnection;
+    Connection dbConnection = null;
+
+
+    public DatabaseHandler(){
+        try {
+            this.dbConnection = this.getDbConnection();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public Connection getDbConnection()
             throws ClassNotFoundException, SQLException
     {
-      String connectionString = "jdbc:mysql://" + dbHost + ":"
-              + dbPort + "/" + dbName;
-
-      dbConnection = DriverManager.getConnection(connectionString, dbUser, dbPass);
-
-      return dbConnection;
+        if(this.dbConnection == null)
+        {
+            String connectionString = "jdbc:mysql://" + dbHost + ":"
+                    + dbPort + "/" + dbName +"?autoReconnect=true&useSSL=false";
+            dbConnection = DriverManager.getConnection(connectionString, dbUser, dbPass);
+        }
+        return dbConnection;
     }
 
     public void addUser(String login, String password, String mail)
@@ -182,80 +195,32 @@ public class DatabaseHandler extends Configs{
         }
     }
 
-    private int _selectMaxId()
-    {
-        String sel = "SELECT * FROM " + Const.BAGS_CONTENT_TABLE + " ORDER BY " + Const.BAGS_CONTENT_ID + " DESC LIMIT 1";
-        Statement st = null;
-        try
-        {
-            st = getDbConnection().createStatement();
-            ResultSet res = st.executeQuery(sel);
-            res.next();
-            return res.getInt(Const.BAGS_CONTENT_ID);
-        } catch (SQLException | ClassNotFoundException throwables) {
-            throwables.printStackTrace();
-        }
-        return -1;
-    }
-
-    public void addBagsContent(String mail, String name, String ticket, String ticket_name, int count){
+    public void addBagsContent(String mail, String ticket, String ticket_name, int count, String bagname){
         HashMap bag;
-        bag = this.selectBags(mail, name);
-        String insert = "INSERT INTO " + Const.BAGS_CONTENT_TABLE + "(" + Const.BAGS_CONTENT_TICKET +
-                "," + Const.BAGS_CONTENT_TICKET_NAME + "," + Const.BAGS_CONTENT_COUNT +
-                 ")" + " VALUES(?,?,?)";
+        bag = this.selectBags(mail, bagname);
         try {
-            Connection con = getDbConnection();
-            //con.setAutoCommit(false);
-            PreparedStatement prst = con.prepareStatement(insert);
-            prst.setString(1, ticket);
-            prst.setString(2, ticket_name);
-            prst.setInt(3, count);
-            prst.execute();
+            this.getDbConnection().setAutoCommit(false);
 
-            int id = this._selectMaxId();
+            String insert = "INSERT INTO " + Const.BAGS_CONTENT_TABLE + "(" +
+                    Const.BAGS_CONTENT_TICKET + "," + Const.BAGS_CONTENT_TICKET_NAME + ")" + "VALUES(?,?)";
+            PreparedStatement prSt = getDbConnection().prepareStatement(insert);
+            prSt.setString(1, ticket);
+            prSt.setString(2, ticket_name);
+            prSt.execute();
 
-            insert = "INSERT INTO " + Const.BAGS_HAS_BAGS_CONTENT_TABLE + "(" + Const.MAP_BAGS_ID + "," +
-                    Const.MAP_BAGS_CONTENT_ID + "," + Const.BAGS_CONTENT_TICKET + ")" + " VALUES(?,?,?)";
-            prst = con.prepareStatement(insert);
-            prst.setInt(1, Integer.parseInt((String) bag.get(Const.BAG_ID)));
-            prst.setInt(2, id);
-            prst.setString(3, ticket);
-            prst.execute();
-            //con.commit();
-            //con.setAutoCommit(true);
-        } catch (SQLException | ClassNotFoundException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    public void deleteBagsContent(String mail, String name, String ticket){
-
-        String select = "SELECT * FROM " + Const.BAGS_HAS_BAGS_CONTENT_TABLE + " WHERE " + Const.MAP_BAGS_ID +
-                " = ? AND " + Const.MAP_TICKET + " = ?";
-        HashMap bag = selectBags(mail, name);
-        try {
-            Connection con = getDbConnection();
-            PreparedStatement prst = con.prepareStatement(select);
-            int id = Integer.parseInt((String) bag.get(Const.BAG_ID));
-            prst.setInt(1, Integer.parseInt((String) bag.get(Const.BAG_ID)));
-            prst.setString(2, ticket);
-            ResultSet res = prst.executeQuery();
-            res.next();
-            id = res.getInt(Const.MAP_BAGS_CONTENT_ID);
-            String del = "DELETE FROM " + Const.BAGS_CONTENT_TABLE + " WHERE " + Const.BAGS_CONTENT_ID +
-                    " = ?";
-            prst = con.prepareStatement(del);
-            prst.setInt(1, id);
-            prst.execute();
-
-            del = "DELETE FROM " + Const.BAGS_HAS_BAGS_CONTENT_TABLE + " WHERE " + Const.MAP_BAGS_CONTENT_ID +
-                    " = ? AND " + Const.MAP_BAGS_ID + " = ?";
-            prst = con.prepareStatement(del);
-            prst.setInt(1, id);
-            prst.setInt(2, Integer.parseInt((String) bag.get(Const.BAG_ID)));
-            prst.execute();
-
+            String set = "SET @li = LAST_INSERT_ID()";
+            Statement st = getDbConnection().createStatement();
+            st.execute(set);
+            insert = "INSERT INTO "+ Const.BAGS_HAS_BAGS_CONTENT_TABLE + "(" +
+                    Const.MAP_BAGS_ID + "," + Const.MAP_BAGS_CONTENT_ID + "," + Const.BAGS_CONTENT_TICKET +
+                    "," + Const.BAGS_CONTENT_COUNT + ")" + "VALUES(?,@li,?,?)";
+            prSt = getDbConnection().prepareStatement(insert);
+            prSt.setInt(1, (Integer.parseInt((String) bag.get(Const.BAG_ID))));
+            prSt.setString(2,ticket);
+            prSt.setInt(3, count);
+            prSt.execute();
+            this.getDbConnection().commit();
+            this.getDbConnection().setAutoCommit(true);
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
