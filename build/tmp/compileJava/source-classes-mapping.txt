@@ -1,7 +1,7 @@
 DataBase/TestRun.java
  DataBase.TestRun
-GUI/LoginController.java
- GUI.LoginController
+DataBase/Configs.java
+ DataBase.Configs
 Crypto/CryptoStrategy.java
  Crypto.CryptoStrategy
 Stock/MarketStackJSON.java
@@ -38,5 +38,5 @@ Stock/Pagination.java
  Stock.Pagination
 Crypto/Crypto_BitcoinAverageAPI.java
  Crypto.Crypto_BitcoinAverageAPI
-DataBase/Configs.java
- DataBase.Configs
+GUI/LoginController.java
+ GUI.LoginController
