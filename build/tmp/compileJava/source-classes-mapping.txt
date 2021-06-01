@@ -26,17 +26,17 @@ Stock/Datum.java
  Stock.Datum
 Stock/StockStrategy.java
  Stock.StockStrategy
-GUI/Controller.java
- GUI.Controller
-ru/mirea/team_project/Main.java
- ru.mirea.team_project.Main
+Crypto/Crypto_BitcoinAverageAPI.java
+ Crypto.Crypto_BitcoinAverageAPI
 Crypto/CryptoContext.java
  Crypto.CryptoContext
 Stock/StockTest.java
  Stock.StockTest
+GUI/BugController.java
+ GUI.BugController
 Stock/Pagination.java
  Stock.Pagination
-Crypto/Crypto_BitcoinAverageAPI.java
- Crypto.Crypto_BitcoinAverageAPI
+ru/mirea/team_project/Main.java
+ ru.mirea.team_project.Main
 GUI/LoginController.java
  GUI.LoginController

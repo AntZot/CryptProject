@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /** Класс контроллера главного окна приложения*/
-public class AuthController implements Initializable {
+public class BugController implements Initializable {
     private boolean isLogin;
     final private ArrayList<XYChart.Series> list = new ArrayList<>();
     private DatabaseHandler dbHandl;

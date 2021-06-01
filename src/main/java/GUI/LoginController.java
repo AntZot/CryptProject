@@ -13,14 +13,16 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 /** Класс контроллера окна логина*/
 public class LoginController {
     //база данных
-    private DatabaseHandler dbHandler;
+    private DatabaseHandler dbHandler = new DatabaseHandler();
 
     @FXML
     private TextField LoginTextField;
@@ -36,6 +38,9 @@ public class LoginController {
 
     @FXML
     private CheckBox ToggleButtom;
+
+    @FXML
+    private Text WrongLogMessage;
 
     /**
      * Проверяет событие на toggleButtom
@@ -62,24 +67,38 @@ public class LoginController {
      */
     @FXML
     void LoginButtomAnAction(ActionEvent event) {
-        System.out.println(LoginTextField.getText());
+        HashMap user = dbHandler.selectUserMail(LoginTextField.getText());
         //Код смены окон
-        if(true){
-            try {
-            Parent root = FXMLLoader.load(getClass().getResource("CryptMain.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("My New Stage Title");
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setScene(new Scene(root));
-            TimeUnit.SECONDS.sleep(2);
-            stage.show();
-            ((Node)(event.getSource())).getScene().getWindow().hide();
-            }catch (Exception e) {
-                e.printStackTrace();
+        try {
+            //Не пустой если пользователь существует
+            if (!user.isEmpty()) {
+                if(user.get("password").equals(HidePasswordTextField.getText())||
+                        user.get("password").equals(ShowPasswordTextField.getText())) {
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("CryptMain.fxml"));
+                        Stage stage = new Stage();
+                        stage.setTitle("My New Stage Title");
+                        stage.initStyle(StageStyle.UNDECORATED);
+                        stage.setScene(new Scene(root));
+                        TimeUnit.SECONDS.sleep(1);
+                        stage.show();
+                        ((Node) (event.getSource())).getScene().getWindow().hide();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    WrongLogMessage.setText("Wrong login or password!");
+                    WrongLogMessage.setVisible(true);
+                }
+            } else {
+                WrongLogMessage.setText("Wrong login or password!");
+                WrongLogMessage.setVisible(true);
             }
-        }
-        else{
-            //Попробуйте залогиниться снова
+        }catch(Exception e){
+            e.printStackTrace();
+            WrongLogMessage.setText("Database is not available now");
+            WrongLogMessage.setVisible(true);
         }
     }
 

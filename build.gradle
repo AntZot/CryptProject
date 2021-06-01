@@ -11,7 +11,7 @@ javafx {
 
 
 application {
-    mainClass.set("GUI.GUI")
+    mainClass.set("ru.mirea.team_project.Main")
 }
 
 repositories {

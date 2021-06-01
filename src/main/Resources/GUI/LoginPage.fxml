@@ -36,6 +36,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Text fx:id="WrongLogMessage" fill="#f00202" layoutX="225.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database is not available now" visible="false" wrappingWidth="171.73675537109375" />
                </children>
             </AnchorPane>
          </children>

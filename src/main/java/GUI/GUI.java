@@ -1,5 +1,7 @@
 package GUI;
 
+import DataBase.DatabaseHandler;
+import DataBase.TestRun;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +29,7 @@ public class GUI extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
+        //TestRun.main();//Заполнение бд
         try{
             root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
             Scene scene = new Scene(root);
