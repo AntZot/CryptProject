@@ -1,5 +1,6 @@
 package GUI;
 
+import DataBase.DatabaseHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,6 +11,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -19,6 +21,7 @@ public class Controller implements Initializable {
     final private ArrayList<XYChart.Series> list = new ArrayList<>();
     private int count=0;
 
+    private DatabaseHandler DbHadler;
     @FXML
     private CategoryAxis x;
 

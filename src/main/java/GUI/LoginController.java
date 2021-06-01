@@ -1,5 +1,6 @@
 package GUI;
 
+import DataBase.DatabaseHandler;
 import com.sun.source.tree.TryTree;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,8 @@ import javafx.stage.StageStyle;
 import java.util.concurrent.TimeUnit;
 /** Класс контроллера окна логина*/
 public class LoginController {
+    //база данных
+    private DatabaseHandler dbHandler;
 
     @FXML
     private TextField LoginTextField;
@@ -61,10 +64,9 @@ public class LoginController {
     void LoginButtomAnAction(ActionEvent event) {
         System.out.println(LoginTextField.getText());
         //Код смены окон
-        /*
-        if(если в бд есть пользователь){
+        if(true){
             try {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Resources/CryptMain.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("CryptMain.fxml"));
             Stage stage = new Stage();
             stage.setTitle("My New Stage Title");
             stage.initStyle(StageStyle.UNDECORATED);
@@ -79,7 +81,6 @@ public class LoginController {
         else{
             //Попробуйте залогиниться снова
         }
-        */
     }
 
     /**
