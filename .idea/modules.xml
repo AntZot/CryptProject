@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Работа с API.iml" filepath="$PROJECT_DIR$/Работа с API.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CryptProject.iml" filepath="$PROJECT_DIR$/.idea/modules/CryptProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CryptProject.main.iml" filepath="$PROJECT_DIR$/.idea/modules/CryptProject.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CryptProject.test.iml" filepath="$PROJECT_DIR$/.idea/modules/CryptProject.test.iml" />
     </modules>
   </component>
 </project>

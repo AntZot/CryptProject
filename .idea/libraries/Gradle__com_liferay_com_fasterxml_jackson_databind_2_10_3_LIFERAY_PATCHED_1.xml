@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: com.liferay:com.fasterxml.jackson.databind:2.10.3.LIFERAY-PATCHED-1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.liferay/com.fasterxml.jackson.databind/2.10.3.LIFERAY-PATCHED-1/5f575a6a0059f80f8a25b8588ec473e3f2f082b1/com.fasterxml.jackson.databind-2.10.3.LIFERAY-PATCHED-1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
