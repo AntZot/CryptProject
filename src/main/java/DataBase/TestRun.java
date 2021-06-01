@@ -1,4 +1,5 @@
 package DataBase;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TestRun {
@@ -7,8 +8,11 @@ public class TestRun {
         String pass = "12345";
         String mail = "glebaiva@gmail.com";
         HashMap user = new HashMap<>();
+        ArrayList<HashMap> bag = new ArrayList<>();
         DatabaseHandler dbHandler = new DatabaseHandler();
-        dbHandler.addBagsContent(mail, "SBER", "SBERBANK", 5, "FirstBag");
+        bag = dbHandler.selectBagsContent(mail,"Se");
+        System.out.println(bag);
+//        dbHandler.addBagsContent(mail, "SBER", "SBERBANK", 5, "FirstBag");
 //        dbHandler.deleteBagsContent(mail, "first", "tink");
 //        dbHandler.addUser(log,pass, mail);
 //        dbHandler.addUser("anton", pass, "anton");

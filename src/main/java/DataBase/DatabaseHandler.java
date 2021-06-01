@@ -160,7 +160,7 @@ public class DatabaseHandler extends Configs{
         String sel = "SELECT * FROM " + Const.BAGS_TABLE + " WHERE " + Const.BAG_USERS_MAIL + " = ?";
         ArrayList<HashMap<String, String>> content = new ArrayList<>();
         try {
-            PreparedStatement prSt = getDbConnection().prepareStatement(sel);
+            PreparedStatement prSt = this.getDbConnection().prepareStatement(sel);
             prSt.setString(1, (String) user.get(Const.USER_MAIL));
             ResultSet res = prSt.executeQuery();
             while (res.next())
@@ -185,7 +185,7 @@ public class DatabaseHandler extends Configs{
         try {
             String update = "UPDATE " + Const.BAGS_TABLE + " SET " + Const.BAG_PROFIT +  " = ? "+
                     "WHERE " + Const.BAG_USERS_MAIL + " = ?" + "AND " + Const.BAG_NAME + " = ?";
-            PreparedStatement prSt = getDbConnection().prepareStatement(update);
+            PreparedStatement prSt = this.getDbConnection().prepareStatement(update);
             prSt.setInt(1, profit);
             prSt.setString(2, (String) user.get(Const.USER_MAIL));
             prSt.setString(3, bagName);
@@ -203,13 +203,13 @@ public class DatabaseHandler extends Configs{
 
             String insert = "INSERT INTO " + Const.BAGS_CONTENT_TABLE + "(" +
                     Const.BAGS_CONTENT_TICKET + "," + Const.BAGS_CONTENT_TICKET_NAME + ")" + "VALUES(?,?)";
-            PreparedStatement prSt = getDbConnection().prepareStatement(insert);
+            PreparedStatement prSt = this.getDbConnection().prepareStatement(insert);
             prSt.setString(1, ticket);
             prSt.setString(2, ticket_name);
             prSt.execute();
 
             String set = "SET @li = LAST_INSERT_ID()";
-            Statement st = getDbConnection().createStatement();
+            Statement st = this.getDbConnection().createStatement();
             st.execute(set);
             insert = "INSERT INTO "+ Const.BAGS_HAS_BAGS_CONTENT_TABLE + "(" +
                     Const.MAP_BAGS_ID + "," + Const.MAP_BAGS_CONTENT_ID + "," + Const.BAGS_CONTENT_TICKET +
@@ -224,5 +224,56 @@ public class DatabaseHandler extends Configs{
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
+    }
+    public void deleteBagsContent( String bagNmae, String ticket, String mail){
+        try {
+            this.getDbConnection().setAutoCommit(false);
+            HashMap bag = this.selectBags(mail, bagNmae);
+            String st = "SELECT * FROM " + Const.BAGS_HAS_BAGS_CONTENT_TABLE + " WHERE " + Const.MAP_BAGS_ID
+                    + " = ? AND " + Const.MAP_TICKET  + " = ?";
+            ResultSet res;
+            PreparedStatement prst = this.getDbConnection().prepareStatement(st);
+            prst.setString(1,(String) bag.get(Const.BAG_ID));
+            prst.setString(2, ticket);
+            res = prst.executeQuery();
+            res.next();
+            st = "DELETE FROM " + Const.BAGS_CONTENT_TABLE + " WHERE " + Const.BAGS_CONTENT_ID + " = ?";
+            prst = getDbConnection().prepareStatement(st);
+            prst.setString(1, res.getString(Const.MAP_BAGS_CONTENT_ID));
+            prst.execute();
+            this.getDbConnection().commit();
+            this.getDbConnection().setAutoCommit(true);
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public ArrayList selectBagsContent(String mail, String bagName){
+        ArrayList<HashMap<String,String>> content = new ArrayList<>();
+        try {
+            this.getDbConnection().setAutoCommit(false);
+            HashMap bag = this.selectBags(mail, bagName);
+            String st = "SELECT * FROM " + Const.BAGS_HAS_BAGS_CONTENT_TABLE + " WHERE " +
+                    Const.MAP_BAGS_ID + "  = ? ";
+            ResultSet res;
+            PreparedStatement prst = this.getDbConnection().prepareStatement(st);
+            prst.setString(1, (String) bag.get(Const.BAG_ID));
+            res = prst.executeQuery();
+
+            while (res.next()){
+                HashMap<String, String> tmp = new HashMap<>();
+                tmp.put(Const.MAP_BAGS_ID, res.getString(Const.MAP_BAGS_CONTENT_ID));
+                tmp.put(Const.MAP_BAGS_CONTENT_ID, res.getString(Const.MAP_BAGS_CONTENT_ID));
+                tmp.put(Const.BAGS_CONTENT_TICKET, res.getString(Const.BAGS_CONTENT_TICKET));
+                tmp.put(Const.BAGS_CONTENT_COUNT, res.getString(Const.BAGS_CONTENT_COUNT));
+                tmp.put(Const.BAGS_CONTENT_DATE_START, res.getString(Const.BAGS_CONTENT_DATE_START));
+                tmp.put(Const.BAGS_CONTENT_DATE_FINISH, res.getString(Const.BAGS_CONTENT_DATE_FINISH));
+                content.add(tmp);
+            }
+            this.getDbConnection().commit();
+            this.getDbConnection().setAutoCommit(true);
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+        return content;
     }
 }
