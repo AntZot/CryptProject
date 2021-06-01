@@ -2,12 +2,20 @@
   <library name="lib">
     <CLASSES>
       <root url="file://$USER_HOME$/Documents/JavaLibrary/javafx-sdk-11.0.2/lib" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files (x86)/MySQL/Connector J 8.0/mysql-connector-java-8.0.23.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../jar_files/mybatis-3.5.6.jar!/" />
+      <root url="file://$PROJECT_DIR$/../jar_files/commons-io-2.8.0" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="file://$PROJECT_DIR$/../jar_files/commons-io-2.8.0/docs" />
+    </JAVADOC>
     <SOURCES>
       <root url="file://$USER_HOME$/Documents/JavaLibrary/javafx-sdk-11.0.2/lib" />
+      <root url="file://$PROJECT_DIR$/../jar_files/commons-io-2.8.0" />
     </SOURCES>
     <jarDirectory url="file://$USER_HOME$/Documents/JavaLibrary/javafx-sdk-11.0.2/lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../jar_files/commons-io-2.8.0" recursive="false" />
     <jarDirectory url="file://$USER_HOME$/Documents/JavaLibrary/javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
+    <jarDirectory url="file://$PROJECT_DIR$/../jar_files/commons-io-2.8.0" recursive="false" type="SOURCES" />
   </library>
 </component>
