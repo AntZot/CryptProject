@@ -16,12 +16,12 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /** Класс контроллера главного окна приложения*/
-public class Controller implements Initializable {
+public class AuthController implements Initializable {
     private boolean isLogin;
     final private ArrayList<XYChart.Series> list = new ArrayList<>();
+    private DatabaseHandler dbHandl;
     private int count=0;
 
-    private DatabaseHandler DbHadler;
     @FXML
     private CategoryAxis x;
 
@@ -52,6 +52,7 @@ public class Controller implements Initializable {
         if(event.getSource() == exitBtm){
             System.exit(0);
         }
+
         if(event.getSource() == addBtm){
             XYChart.Series sr = new XYChart.Series();
             sr.getData().add(new XYChart.Data(""+count+2,count));
