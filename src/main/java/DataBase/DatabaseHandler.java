@@ -276,4 +276,27 @@ public class DatabaseHandler extends Configs{
         }
         return content;
     }
+
+    public void UpdateTicket(String mail, String bagName, String ticket, int newCount,
+                             String newTimeStart, String newTimeFinish){
+        HashMap bag = this.selectBags(mail, bagName);
+        try {
+            this.getDbConnection().setAutoCommit(false);
+            String st = "UPDATE " + Const.BAGS_HAS_BAGS_CONTENT_TABLE + " SET " +
+                    Const.BAGS_CONTENT_COUNT + " = ? , " + Const.BAGS_CONTENT_DATE_START + " = ?, " +
+                    Const.BAGS_CONTENT_DATE_FINISH + " = ? WHERE " + Const.MAP_BAGS_ID + " = ?" +
+                    " AND " + Const.MAP_TICKET + " = ?";
+            PreparedStatement prst = getDbConnection().prepareStatement(st);
+            prst.setInt(1, newCount);
+            prst.setString(2, newTimeStart);
+            prst.setString(3, newTimeFinish);
+            prst.setString(4, (String )bag.get(Const.BAG_ID));
+            prst.setString(5, ticket);
+            prst.execute();
+            this.getDbConnection().commit();
+            this.getDbConnection().setAutoCommit(true);
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }

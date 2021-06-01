@@ -10,8 +10,7 @@ public class TestRun {
         HashMap user = new HashMap<>();
         ArrayList<HashMap> bag = new ArrayList<>();
         DatabaseHandler dbHandler = new DatabaseHandler();
-        bag = dbHandler.selectBagsContent(mail,"Se");
-        System.out.println(bag);
+        dbHandler.UpdateTicket(mail, "FirstBag", "SBER", 6, null, null);
 //        dbHandler.addBagsContent(mail, "SBER", "SBERBANK", 5, "FirstBag");
 //        dbHandler.deleteBagsContent(mail, "first", "tink");
 //        dbHandler.addUser(log,pass, mail);
