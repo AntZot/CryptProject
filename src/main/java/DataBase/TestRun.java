@@ -3,9 +3,9 @@ import java.util.HashMap;
 
 public class TestRun {
     public static void main() {
-        String log = "Gleb";
-        String pass = "12345";
-        String mail = "glebaiva@gmail.com";
+        String log = "1";
+        String pass = "1";
+        String mail = "1";
         HashMap user = new HashMap<>();
         DatabaseHandler dbHandler = new DatabaseHandler();
         dbHandler.addUser(log,pass, mail);

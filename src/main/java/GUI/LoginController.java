@@ -3,6 +3,7 @@ package GUI;
 import DataBase.DatabaseHandler;
 import com.sun.source.tree.TryTree;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,15 +13,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 /** Класс контроллера окна логина*/
 public class LoginController {
+    private double xOffset,yOffset;
     //база данных
     private DatabaseHandler dbHandler = new DatabaseHandler();
 
@@ -75,14 +80,32 @@ public class LoginController {
                 if(user.get("password").equals(HidePasswordTextField.getText())||
                         user.get("password").equals(ShowPasswordTextField.getText())) {
                     try {
-                        Parent root = FXMLLoader.load(getClass().getResource("CryptMain.fxml"));
+                        FXMLLoader fxmldr = new FXMLLoader(getClass().getResource("CryptMain.fxml"));
                         Stage stage = new Stage();
-                        stage.setTitle("My New Stage Title");
+                        stage.setTitle("Bag Helper");
                         stage.initStyle(StageStyle.UNDECORATED);
+                        Parent root = fxmldr.load();
                         stage.setScene(new Scene(root));
+                        //
+                        BugController controller = fxmldr.getController();
+                        controller.setAtribute(user,dbHandler);
                         TimeUnit.SECONDS.sleep(1);
                         stage.show();
                         ((Node) (event.getSource())).getScene().getWindow().hide();
+                        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                xOffset = stage.getX() - event.getScreenX();
+                                yOffset = stage.getY() - event.getScreenY();
+                            }
+                        });
+                        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent event) {
+                                stage.setX(event.getScreenX() + xOffset);
+                                stage.setY(event.getScreenY() + yOffset);
+                            }
+                        });
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

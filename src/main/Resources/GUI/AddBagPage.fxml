@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="199.0" prefWidth="445.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.AddController">
+   <children>
+      <AnchorPane layoutX="12.0" layoutY="14.0" prefHeight="167.0" prefWidth="420.0" style="-fx-background-color: grey;">
+         <children>
+            <Button id="ExitBt" fx:id="closeBtm" layoutX="112.0" layoutY="122.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ClickHandler" prefHeight="27.0" prefWidth="74.0" style="-fx-background-color: white;" text="Cancle" />
+            <Button fx:id="SetBagNameBtn" layoutX="220.0" layoutY="122.0" mnemonicParsing="false" onAction="#SetBagNameHandler" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: white;" text="Add" />
+            <TextField fx:id="BagName" layoutX="183.0" layoutY="49.0" />
+            <Text layoutX="82.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bag Name" wrappingWidth="67.83123779296875" />
+            <Text fx:id="WrongName" fill="#e81e1e" layoutX="191.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong" />
+         </children></AnchorPane>
+   </children>
+</AnchorPane>

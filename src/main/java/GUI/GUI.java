@@ -29,7 +29,6 @@ public class GUI extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
-        //TestRun.main();//Заполнение бд
         try{
             root = FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
             Scene scene = new Scene(root);

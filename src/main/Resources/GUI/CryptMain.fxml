@@ -4,37 +4,31 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.BugController">
    <children>
       <VBox layoutY="102.0" prefHeight="498.0" prefWidth="122.0" style="-fx-background-color: grey;">
          <children>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="122.0" text="main">
+            <Button fx:id="MainBtm" mnemonicParsing="false" onAction="#ClickHandler" prefHeight="55.0" prefWidth="122.0" text="main">
                <graphic>
-                  <ImageView>
-                     <image>
-                        <Image url="@../../../../Downloads/icons8-биткоин-24.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView />
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="80.0" text="New list" />
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="80.0" text="List" />
+            <Button fx:id="addBtm" mnemonicParsing="false" onAction="#ClickHandler" prefHeight="56.0" prefWidth="122.0" text="Add Bag" />
+            <Button mnemonicParsing="false" prefHeight="59.0" prefWidth="126.0" text="Selecteted Bag" />
          </children>
       </VBox>
-      <LineChart fx:id="Graph" layoutX="444.0" layoutY="102.0" prefHeight="294.0" prefWidth="355.0">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </LineChart>
-      <AnchorPane prefHeight="102.0" prefWidth="800.0" style="-fx-background-color: grey;">
+      <AnchorPane prefHeight="102.0" prefWidth="802.0" style="-fx-background-color: grey;">
          <children>
             <Button id="ExitBt" fx:id="exitBtm" layoutX="773.0" layoutY="12.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ClickHandler" prefHeight="15.0" prefWidth="14.0" style="-fx-background-color: grey;">
                <graphic>
@@ -45,8 +39,41 @@
                   </ImageView>
                </graphic>
             </Button>
+            <ImageView fitHeight="88.0" fitWidth="103.0" layoutX="22.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@IconImage/cryptocoin.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="282.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crypto Bag Helper">
+               <font>
+                  <Font size="43.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
-      <Button fx:id="addBtm" layoutX="307.0" layoutY="420.0" mnemonicParsing="false" onAction="#ClickHandler" prefHeight="50.0" prefWidth="80.0" text="addBtm" />
+      <AnchorPane fx:id="mainPain" layoutX="122.0" layoutY="102.0" prefHeight="498.0" prefWidth="678.0">
+         <children>
+            <TableView fx:id="table" prefHeight="498.0" prefWidth="678.0">
+              <columns>
+                <TableColumn fx:id="bag" prefWidth="333.59998321533203" text="Bag" />
+                  <TableColumn prefWidth="344.0000305175781" text="Profit" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
+      <AnchorPane fx:id="BagPain" prefHeight="600.0" prefWidth="802.0" visible="false">
+         <children>
+            <ListView layoutX="136.0" layoutY="151.0" prefHeight="434.0" prefWidth="318.0" />
+            <LineChart layoutX="457.0" layoutY="110.0" prefHeight="246.0" prefWidth="330.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </LineChart>
+            <TextField layoutX="136.0" layoutY="110.0" prefHeight="26.0" prefWidth="226.0" />
+            <Button layoutX="387.0" layoutY="110.0" mnemonicParsing="false" text="Button" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
