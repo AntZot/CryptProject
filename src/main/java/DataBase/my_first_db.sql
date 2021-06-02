@@ -32,7 +32,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `project`.`bags` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  `profit` VARCHAR(45) NOT NULL DEFAULT 0,
+  `profit` VARCHAR(45) NULL DEFAULT 0,
   `users_mail` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_bags_users1_idx` (`users_mail` ASC) VISIBLE,
