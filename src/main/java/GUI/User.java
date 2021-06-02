@@ -1,17 +1,17 @@
 package GUI;
 
 
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-
-import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
 public class User {
     Button bag;
 
-    User(String butText){
+    User(BugController controller,String butText){
         bag = new Button(butText);
         bag.prefWidth(200);
         bag.setId("BagsVariant");
+        bag.addEventHandler(ActionEvent.ANY, event -> controller.ClickHandler(event));
     }
 
     public Button getBag() {

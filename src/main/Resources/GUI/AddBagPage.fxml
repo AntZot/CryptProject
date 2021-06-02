@@ -13,7 +13,7 @@
             <Button fx:id="SetBagNameBtn" layoutX="220.0" layoutY="122.0" mnemonicParsing="false" onAction="#SetBagNameHandler" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: white;" text="Add" />
             <TextField fx:id="BagName" layoutX="183.0" layoutY="49.0" />
             <Text layoutX="82.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bag Name" wrappingWidth="67.83123779296875" />
-            <Text fx:id="WrongName" fill="#e81e1e" layoutX="191.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong" />
+            <Text fx:id="WrongName" fill="#e81e1e" layoutX="191.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong" visible="false" />
          </children></AnchorPane>
    </children>
 </AnchorPane>

@@ -105,7 +105,7 @@ public class DatabaseHandler extends Configs{
         HashMap user;
         user = this.selectUserMail(mail);
         String insert = "INSERT INTO " + Const.BAGS_TABLE + "(" +
-                Const.BAG_NAME + "," + Const.BAG_USERS_MAIL + ")" + "VALUES(?,?)";
+                Const.BAG_NAME  + "," + Const.BAG_USERS_MAIL + ")" + "VALUES(?,?)";
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(insert);
             prSt.setString(1, bagName);

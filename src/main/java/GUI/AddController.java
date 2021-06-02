@@ -13,14 +13,16 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class AddController {
+    BugController bagController;
     DatabaseHandler dbHandler;
     HashMap user;
     ObservableList<User> list;
 
-    void setAtribute(HashMap usr, DatabaseHandler dbHand, ObservableList list){
+    void setAtribute(HashMap usr, DatabaseHandler dbHand, ObservableList list,BugController bagController){
         user = usr;
         dbHandler = dbHand;
         this.list = list;
+        this.bagController = bagController;
     }
 
     @FXML
@@ -45,7 +47,7 @@ public class AddController {
     public void SetBagNameHandler(ActionEvent event){
         if(event.getSource() == SetBagNameBtn){
             if(!BagName.getText().isEmpty()) {
-                list.add(new User(BagName.getText()));
+                list.add(new User(bagController,BagName.getText()));
                 dbHandler.addBags((String) user.get("mail"), BagName.getText());
                 try {
                     TimeUnit.SECONDS.sleep(1);

@@ -1,15 +1,17 @@
 DataBase/TestRun.java
  DataBase.TestRun
-Crypto/Crypto_BitcoinAverageAPI.java
- Crypto.Crypto_BitcoinAverageAPI
+GUI/LoginController.java
+ GUI.LoginController
+ GUI.LoginController$1
+ GUI.LoginController$2
 Crypto/CryptoStrategy.java
  Crypto.CryptoStrategy
 Stock/MarketStackJSON.java
  Stock.MarketStackJSON
 Crypto/CryptoTest.java
  Crypto.CryptoTest
-Stock/Pagination.java
- Stock.Pagination
+GUI/User.java
+ GUI.User
 Stock/Stock_MarketStackAPI.java
  Stock.Stock_MarketStackAPI
 Stock/StockContext.java
@@ -28,23 +30,21 @@ Stock/Datum.java
  Stock.Datum
 Stock/StockStrategy.java
  Stock.StockStrategy
-DataBase/Configs.java
- DataBase.Configs
-ru/mirea/team_project/Main.java
- ru.mirea.team_project.Main
-Crypto/CryptoContext.java
- Crypto.CryptoContext
-Stock/StockTest.java
- Stock.StockTest
-GUI/LoginController.java
- GUI.LoginController
- GUI.LoginController$1
- GUI.LoginController$2
-GUI/User.java
- GUI.User
 GUI/AddController.java
  GUI.AddController
 GUI/BugController.java
  GUI.BugController
  GUI.BugController$1
  GUI.BugController$2
+ru/mirea/team_project/Main.java
+ ru.mirea.team_project.Main
+Crypto/CryptoContext.java
+ Crypto.CryptoContext
+Stock/StockTest.java
+ Stock.StockTest
+Stock/Pagination.java
+ Stock.Pagination
+Crypto/Crypto_BitcoinAverageAPI.java
+ Crypto.Crypto_BitcoinAverageAPI
+DataBase/Configs.java
+ DataBase.Configs
