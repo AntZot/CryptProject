@@ -1,6 +1,7 @@
 package GUI;
 
 import DataBase.DatabaseHandler;
+import Stock.StockTest;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +25,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -31,6 +33,7 @@ import java.io.FileReader;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
@@ -48,7 +51,7 @@ public class BugController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         table.setItems(list);
         bag.setCellValueFactory(new PropertyValueFactory<>("bag"));
-        loadBag();
+        //loadBag();
     }
 
     /**
@@ -122,9 +125,11 @@ public class BugController implements Initializable {
         for(User us : list){
             if(event.getSource() == us.getBag()) {
                 BagLabelName.setText(us.getBag().getText());
+                BagList.getItems().clear();
+                SearchField.clear();
+                loadBag(us);
                 mainPain.setVisible(false);
                 BagPain.setVisible(true);
-                loadBag();
                 break;
             }
         }
@@ -135,8 +140,12 @@ public class BugController implements Initializable {
                 BagList = new ListView<>();
             }
             BagList.getItems().add(SearchField.getText());
-            for(int i=0;i<1;i++){
-
+            for(User us: list) {
+                if(us.bag.getText().equals(BagLabelName.getText())){
+                    StockTest stock = new StockTest();
+                    us.paperName.put(SearchField.getText(),(ArrayList) stock.getStock().get(SearchField.getText()));
+                    break;
+                }
             }
         }
 
@@ -169,7 +178,15 @@ public class BugController implements Initializable {
     /**
      * Метод, который загружает из бд портфели по e-mail пользователя
      */
-    void loadBag(){
+    void loadBag(User us){
+        if(us!=null) {
+            if (us.paperName != null) {
+                for (String st : us.paperName.keySet()) {
+                    BagList.getItems().add(st);
+
+                }
+            }
+        }
         /*
         for(ArrayList list : (ArrayList<ArrayList>) dbHandler.selectBags((String) user.get("mail")) ){
         list.add(new User(this,""));

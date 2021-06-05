@@ -19,6 +19,22 @@ public class StockTest {
         StockContext stockContext = new StockContext();
         stockContext.setStrategy(new Stock_MarketStackAPI());
         HashMap<String, ArrayList<Pair<Date, Double>>> result = stockContext.executeStrategy(key, code, date_from, date_to);
-        result.forEach((_key, value) -> System.out.println(key + ":" + value));
+        //result.forEach((_key, value) -> System.out.println(_key + ":" + value));
+    }
+
+    public HashMap getStock(){
+        String key = "ad921d5317e6a7ab4996bbb5db5e31c6";
+        String code = "AAPL";
+        String date_from = "2021-01-02";
+        String date_to = "2021-02-02";
+        HashMap<String, ArrayList<Pair<Date, Double>>> result = null;
+        try {
+            StockContext stockContext = new StockContext();
+            stockContext.setStrategy(new Stock_MarketStackAPI());
+            result = stockContext.executeStrategy(key, code, date_from, date_to);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 }
