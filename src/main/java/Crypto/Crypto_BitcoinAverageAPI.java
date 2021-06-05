@@ -42,7 +42,7 @@ public class Crypto_BitcoinAverageAPI implements CryptoStrategy{
         //Парсинг JSON
         ObjectMapper mapper = new ObjectMapper();
         BitcoinAverageJSON crypto = null;
-        //crypto = mapper.readValue(url, BitcoinAverageJSON.class);
+        crypto = mapper.readValue(url, BitcoinAverageJSON.class);
         Double price = crypto.average;
         return price;
     }

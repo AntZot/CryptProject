@@ -48,9 +48,14 @@ public class BugController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         table.setItems(list);
         bag.setCellValueFactory(new PropertyValueFactory<>("bag"));
-
+        loadBag();
     }
 
+    /**
+     *
+     * @param usr
+     * @param dbHand
+     */
     void setAtribute(HashMap usr, DatabaseHandler dbHand){
         user = usr;
         dbHandler = dbHand;
@@ -121,7 +126,7 @@ public class BugController implements Initializable {
         }
 
         if(event.getSource() == SearchButton){
-            loadBag();
+
         }
 
         if(event.getSource() == MainBtm){
@@ -150,8 +155,15 @@ public class BugController implements Initializable {
         }
     }
 
+    /**
+     * Метод, который загружает из бд портфели по e-mail пользователя
+     */
     void loadBag(){
-        SearchField.getText();
+        //System.out.println(dbHandler.selectBags((String) user.get("mail")));
+        /*
+        for(ArrayList list : (ArrayList<ArrayList>) dbHandler.selectBags((String) user.get("mail")) ){
+        list.add(new User(this,""));
+        }*/
     }
 }
 

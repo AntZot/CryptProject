@@ -48,7 +48,7 @@ public class AddController {
         if(event.getSource() == SetBagNameBtn){
             if(!BagName.getText().isEmpty()) {
                 list.add(new User(bagController,BagName.getText()));
-                dbHandler.addBags((String) user.get("mail"), BagName.getText());
+                //dbHandler.addBags((String) user.get("mail"), BagName.getText());
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 } catch (Exception e) {

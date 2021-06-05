@@ -6,7 +6,7 @@ import java.text.ParseException;
 
 public class CryptoTest {
     public static void main(String[] args) throws IOException, URISyntaxException, ParseException {
-        String key = "MjRiNzQ4ZDZkYmEyNDhiY2E0MGM0ZDA5MWFjMWUyNTQ";
+        String key = "c1jlrmf48v6pv69goegg";
         String symbol_set = "global";
         String symbol = "BTCUSD";
         String timestamp = "1612203788";

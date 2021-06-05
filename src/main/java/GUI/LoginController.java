@@ -76,9 +76,13 @@ public class LoginController {
         //Код смены окон
         try {
             //Не пустой если пользователь существует
-            if (!user.isEmpty()) {
-                if(user.get("password").equals(HidePasswordTextField.getText())||
-                        user.get("password").equals(ShowPasswordTextField.getText())) {
+            //!user.isEmpty()
+            if (true) {
+                /*
+                user.get("password").equals(HidePasswordTextField.getText())||
+                        user.get("password").equals(ShowPasswordTextField.getText())
+                 */
+                if(true) {
                     try {
                         FXMLLoader fxmldr = new FXMLLoader(getClass().getResource("CryptMain.fxml"));
                         Stage stage = new Stage();

@@ -50,7 +50,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="BagPain" layoutX="122.0" layoutY="102.0" prefHeight="498.0" prefWidth="678.0">
+      <AnchorPane fx:id="BagPain" layoutX="122.0" layoutY="102.0" prefHeight="498.0" prefWidth="678.0" visible="false">
          <children>
             <ListView layoutX="14.0" layoutY="55.0" prefHeight="434.0" prefWidth="318.0" />
             <LineChart layoutX="339.0" layoutY="48.0" prefHeight="246.0" prefWidth="330.0">
@@ -71,7 +71,7 @@
             <Button layoutX="352.0" layoutY="438.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="52.0" text="Add" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="mainPain" layoutX="122.0" layoutY="102.0" prefHeight="498.0" prefWidth="678.0" visible="false">
+      <AnchorPane fx:id="mainPain" layoutX="122.0" layoutY="102.0" prefHeight="498.0" prefWidth="678.0">
          <children>
             <TableView fx:id="table" prefHeight="498.0" prefWidth="678.0">
               <columns>

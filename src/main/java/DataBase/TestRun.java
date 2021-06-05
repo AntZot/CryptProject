@@ -10,7 +10,8 @@ public class TestRun {
         DatabaseHandler dbHandler = new DatabaseHandler();
         //dbHandler.createDataBase();
         //dbHandler.addUser(log,pass, mail);
-        //dbHandler.addBagsContent(mail, "SBER", "SBERBANK", 5, "FirstBag");
+        dbHandler.addBags(mail, "first");
+        dbHandler.addBagsContent(mail, "SBER", "SBERBANK", 5, "FirstBag");
 //        dbHandler.deleteBagsContent(mail, "first", "tink");
 //        dbHandler.addUser("anton", pass, "anton");
 //        dbHandler.addBags(mail, "first");

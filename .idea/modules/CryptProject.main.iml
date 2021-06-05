@@ -16,7 +16,6 @@
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:win:15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:15.0.1" level="project" />
     <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:win:15.0.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.liferay:com.fasterxml.jackson.databind:2.10.3.LIFERAY-PATCHED-1" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpclient:4.5.13" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.7.4" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.ibatis:ibatis-core:3.0" level="project" />
