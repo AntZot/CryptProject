@@ -2,7 +2,7 @@ package Stock;
 
 import java.util.Date;
 
-public class Datum {
+public class Datum{
     public double open;
     public double high;
     public double low;
@@ -13,6 +13,7 @@ public class Datum {
     public double adj_close;
     public double adj_open;
     public double adj_volume;
+    public double split_factor;
     public String symbol;
     public String exchange;
     public Date date;
