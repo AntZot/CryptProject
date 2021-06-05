@@ -52,7 +52,7 @@ public class BugController implements Initializable {
     }
 
     /**
-     *
+     * Функция передачи данных в контроллер
      * @param usr
      * @param dbHand
      */
@@ -79,10 +79,14 @@ public class BugController implements Initializable {
     }
 
     @FXML
-    private TextField SearchField;
+    private Button BagAddInList;
 
     @FXML
-    private Button SearchButton;
+    private ListView<String> BagList;
+
+    @FXML
+    private TextField SearchField;
+
 
     @FXML
     private AnchorPane BagPain;
@@ -125,8 +129,15 @@ public class BugController implements Initializable {
             }
         }
 
-        if(event.getSource() == SearchButton){
+        //Добавление акции
+        if(event.getSource() == BagAddInList){
+            if(BagList == null){
+                BagList = new ListView<>();
+            }
+            BagList.getItems().add(SearchField.getText());
+            for(int i=0;i<1;i++){
 
+            }
         }
 
         if(event.getSource() == MainBtm){
@@ -159,7 +170,6 @@ public class BugController implements Initializable {
      * Метод, который загружает из бд портфели по e-mail пользователя
      */
     void loadBag(){
-        //System.out.println(dbHandler.selectBags((String) user.get("mail")));
         /*
         for(ArrayList list : (ArrayList<ArrayList>) dbHandler.selectBags((String) user.get("mail")) ){
         list.add(new User(this,""));

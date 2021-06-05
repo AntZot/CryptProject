@@ -8,8 +8,8 @@ Stock/MarketStackJSON.java
  Stock.MarketStackJSON
 Crypto/CryptoTest.java
  Crypto.CryptoTest
-GUI/User.java
- GUI.User
+Crypto/Crypto_BitcoinAverageAPI.java
+ Crypto.Crypto_BitcoinAverageAPI
 Stock/Stock_MarketStackAPI.java
  Stock.Stock_MarketStackAPI
 Stock/StockContext.java
@@ -36,8 +36,6 @@ DataBase/Configs.java
  DataBase.Configs
 Crypto/CryptoContext.java
  Crypto.CryptoContext
-Crypto/Crypto_BitcoinAverageAPI.java
- Crypto.Crypto_BitcoinAverageAPI
 GUI/AddController.java
  GUI.AddController
 GUI/BugController.java
@@ -48,3 +46,5 @@ GUI/LoginController.java
  GUI.LoginController
  GUI.LoginController$1
  GUI.LoginController$2
+GUI/User.java
+ GUI.User

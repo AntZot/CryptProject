@@ -79,6 +79,7 @@ public class LoginController {
             //!user.isEmpty()
             if (true) {
                 /*
+                Проверка на логин
                 user.get("password").equals(HidePasswordTextField.getText())||
                         user.get("password").equals(ShowPasswordTextField.getText())
                  */
