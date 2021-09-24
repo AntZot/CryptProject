@@ -2,7 +2,7 @@ Crypto Bag Helper
 ==================
 Version
 -------
-The application is approaching the first working version
+Version 1.0
 
 About CryptoBagHelper
 ---------------------
@@ -11,7 +11,10 @@ stocks.
 
 Installation
 ------------
-Coming soon...
+- Install Java 15
+  + [Azul Zulu Community version 15](https://cdn.azul.com/zulu/bin/zulu15.34.17-ca-jdk15.0.4-win_x64.msi)
+- Clone this project to your computer
+  
 
 Dependencies
 ------------
