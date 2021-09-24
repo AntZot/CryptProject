@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.BugController">
+   <children>
+      <VBox layoutY="102.0" prefHeight="498.0" prefWidth="122.0" style="-fx-background-color: grey;">
+         <children>
+            <Button fx:id="MainBtm" mnemonicParsing="false" onAction="#ClickHandler" prefHeight="55.0" prefWidth="122.0" text="main">
+               <graphic>
+                  <ImageView />
+               </graphic>
+            </Button>
+            <Button fx:id="addBtm" mnemonicParsing="false" onAction="#ClickHandler" prefHeight="56.0" prefWidth="122.0" text="Add Bag" />
+         </children>
+      </VBox>
+      <AnchorPane prefHeight="102.0" prefWidth="802.0" style="-fx-background-color: grey;">
+         <children>
+            <Button id="ExitBt" fx:id="exitBtm" layoutX="773.0" layoutY="12.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#ClickHandler" prefHeight="15.0" prefWidth="14.0" style="-fx-background-color: grey;">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@IconImage/CloseIcon96.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ImageView fitHeight="88.0" fitWidth="103.0" layoutX="22.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@IconImage/cryptocoin.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="282.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crypto Bag Helper">
+               <font>
+                  <Font size="43.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="BagPain" layoutX="122.0" layoutY="102.0" prefHeight="498.0" prefWidth="678.0" visible="false">
+         <children>
+            <ListView fx:id="BagList" layoutX="14.0" layoutY="55.0" prefHeight="434.0" prefWidth="318.0" />
+            <LineChart layoutX="339.0" layoutY="48.0" prefHeight="246.0" prefWidth="330.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </LineChart>
+            <TextField fx:id="SearchField" layoutX="352.0" layoutY="357.0" prefHeight="26.0" prefWidth="226.0" />
+            <Text fx:id="BagLabelName" layoutX="279.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bag Content">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+            <Button fx:id="BagAddInList" layoutX="603.0" layoutY="352.0" mnemonicParsing="false" onAction="#ClickHandler" prefHeight="36.0" prefWidth="52.0" text="Add" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="mainPain" layoutX="122.0" layoutY="102.0" prefHeight="498.0" prefWidth="678.0">
+         <children>
+            <TableView fx:id="table" prefHeight="498.0" prefWidth="678.0">
+              <columns>
+                <TableColumn fx:id="bag" prefWidth="333.59998321533203" text="Bag" />
+                  <TableColumn prefWidth="344.0000305175781" text="Profit" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
